@@ -4,7 +4,7 @@ const guessInput = document.querySelector(".letter")
 const wordProgress = document.querySelector(".word-in-progress")
 const remainGuessNum = document.querySelector(".remaining")
 const remainGuessText = document.querySelector("span .remaining")
-const remainMessage = document.querySelector(".message")
+const topMessage = document.querySelector(".message")
 const playAgainBtn = document.querySelector(".play-again hide")
 const word = "magnolia"
 
@@ -30,6 +30,31 @@ guessBtn.addEventListener("click", function (e) {
 console.log(guessedLetter);
     guessInput.value = "";
 });
+
+//Letter input code
+
+const validLetterInput = function (input){
+    const acceptedLetter = /[a-zA-Z]/;
+
+    //blank field
+    if (input.length === 0) {
+        topMessage.innerText("Please input a letter A-Z");
+    }
+    //double letters
+    else if (input.length >1) {
+        topMessage.innerText("Please input only ONE letter A-Z :)");
+   
+    }  
+    //not a letter
+    else if (!input.match(acceptedLetter)) {
+        topMessage.innerText("Please input a letter A-Z, nothing more than those 24, ha! That rhymes! *mic drop*");
+    }
+    //vaid letter put in
+    else {
+    return input;
+    }
+
+}
 
 
 
