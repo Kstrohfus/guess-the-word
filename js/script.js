@@ -76,7 +76,19 @@ if (guessedLetters.includes(guessedLetter)) {
     topMessage.innerText = "Opps! You've already guessed that letter!"
 } else {
 guessedLetters.push(guessedLetter);
+
+letterUpdateShow();
 }
 };
 
+const letterUpdateShow = function () {
+    //clear list of letters
+    guessLetter.innerHTML= "";
 
+    for (const letter of guessedLetters){
+        const li = document.createElement("li");
+        li.innerText = letter;
+        guessLetter.append(li);
+    }
+
+}
