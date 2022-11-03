@@ -105,6 +105,11 @@ const wordInProgress = function (){
        { reveal.push("●")}
     }
 }
-
+const winnerCheck = function () {
+    if (word.toUpperCase() === wordInProgress.innerText) {
+        topMessage.classList.add("win");
+        topMessage.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+    }
+};
 
     
