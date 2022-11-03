@@ -7,6 +7,7 @@ const remainGuessText = document.querySelector("span .remaining")
 const topMessage = document.querySelector(".message")
 const playAgainBtn = document.querySelector(".play-again hide")
 const word = "magnolia"
+const guessedLetters = [];
 
 //displaying dot inplace of letters
 const dotPlaceholder = function (word) {
@@ -32,9 +33,15 @@ guessBtn.addEventListener("click", function (e) {
     const guessedLetter = guessInput.value;
     //console.log(guessedLetter);
 
+    //letter input fix it msg 
     const validGuess = validLetterInput(guessedLetter);
     console.log(validGuess)
 
+    if (validGuess) {
+        makeGuess(guessedLetter);
+    
+    }
+//clearing letter
     guessInput.value = "";
 
 });
@@ -61,8 +68,15 @@ const validLetterInput = function (input){
     else {
     return input;
     }
-
 }
 
+const makeGuess = function (guessedLetter) {
+guessedLetter = guessedLetter.toUpperCase();
+if (guessedLetters.includes(guessedLetter)) {
+    topMessage.innerText = "Opps! You've already guessed that letter!"
+} else {
+guessedLetters.push(guessedLetter);
+}
+};
 
 
