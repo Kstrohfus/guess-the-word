@@ -26,9 +26,17 @@ dotPlaceholder(word);
 
 guessBtn.addEventListener("click", function (e) {
     e.preventDefault();
+//top msg text that's hidden and pops back up
+    topMessage.innerText = "";
+//what was typed in
     const guessedLetter = guessInput.value;
-console.log(guessedLetter);
+    //console.log(guessedLetter);
+
+    const validGuess = validLetterInput(guessedLetter);
+    console.log(validGuess)
+
     guessInput.value = "";
+
 });
 
 //Letter input code
@@ -38,16 +46,16 @@ const validLetterInput = function (input){
 
     //blank field
     if (input.length === 0) {
-        topMessage.innerText("Please input a letter A-Z");
+        topMessage.innerText = "Please input a letter A-Z";
     }
     //double letters
     else if (input.length >1) {
-        topMessage.innerText("Please input only ONE letter A-Z :)");
+        topMessage.innerText = "Please input only ONE letter A-Z :)";
    
     }  
     //not a letter
     else if (!input.match(acceptedLetter)) {
-        topMessage.innerText("Please input a letter A-Z, nothing more than those 24, ha! That rhymes! *mic drop*");
+        topMessage.innerText = "Please input a letter A-Z, nothing more than those 24, ha! That rhymes! *mic drop*";
     }
     //vaid letter put in
     else {
