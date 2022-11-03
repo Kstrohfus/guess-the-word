@@ -78,6 +78,8 @@ if (guessedLetters.includes(guessedLetter)) {
 guessedLetters.push(guessedLetter);
 
 letterUpdateShow();
+
+wordInProgress(guessedLetters);
 }
 };
 
@@ -90,5 +92,19 @@ const letterUpdateShow = function () {
         li.innerText = letter;
         guessLetter.append(li);
     }
-
 }
+//letters to show up and word to be put in array
+const wordInProgress = function (){
+    const wordUpper = word.toUpperCase();
+    const wordArray = wordUpper.split("");
+    const reveal = [];
+    console.log(wordArray);
+
+    for (const letter of wordArray){
+      if (guessedLetters.includes(letter))
+       { reveal.push("●")}
+    }
+}
+
+
+    
