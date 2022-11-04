@@ -3,11 +3,12 @@ const guessBtn = document.querySelector(".guess")
 const guessInput = document.querySelector(".letter")
 const wordProgress = document.querySelector(".word-in-progress")
 const remainGuessNum = document.querySelector(".remaining")
-const remainGuessText = document.querySelector("span .remaining")
+const remainGuessText = document.querySelector(" .remaining span")
 const topMessage = document.querySelector(".message")
 const playAgainBtn = document.querySelector(".play-again hide")
-const word = "magnolia"
+let word = "magnolia"
 const guessedLetters = [];
+let remainingGuesses = 8;
 
 //displaying dot inplace of letters
 const dotPlaceholder = function (word) {
@@ -78,9 +79,12 @@ if (guessedLetters.includes(guess)) {
 guessedLetters.push(guess);
 console.log(guessedLetters)
 
+remainingGuessCount(guess)
+
 letterUpdateShow();
 
 wordInProgress(guessedLetters);
+
 }
 };
 
@@ -113,6 +117,33 @@ const wordInProgress = function (guessedLetters){
     winnerCheck();
 };
 
+//count guesses remaining and text
+    const remainingGuessCount = function (guess) {
+        const upWord = word.toUpperCase();
+
+        if (!upWord.includes(guess)){
+            topMessage.innerText = `Sorry the word has no ${guess}. `;
+
+            remainingGuesses-= 1
+        } else {
+        topMessage.innerText = `Yay! The word has the letter ${guess}!`;
+            }
+
+            if (remainingGuesses === 0) {
+                topMessage.innerHTML = `Game over! The word was <span class="highlight"> ${word} </span>.`;
+            }
+
+            else if (remainingGuesses === 1) {
+                remainGuessText.innerText = `${remainingGuesses} guess`;
+            }
+            else {
+                remainGuessText.innerText = `${remainingGuesses} guesses`;
+            }
+        };
+
+    
+
+//checking for a win
 const winnerCheck = function () {
     if (word.toUpperCase() === wordProgress.innerText) {
         topMessage.classList.add("win");
@@ -120,4 +151,4 @@ const winnerCheck = function () {
     }
 };
 
-    
+  
