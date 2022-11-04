@@ -17,7 +17,7 @@ const dotPlaceholder = function (word) {
     dots.push("●");
     }
 
-    wordProgress.innerText = dots.join("●")  
+    wordProgress.innerText = dots.join("")  
       
 };
 
@@ -30,15 +30,15 @@ guessBtn.addEventListener("click", function (e) {
 //top msg text that's hidden and pops back up
     topMessage.innerText = "";
 //what was typed in
-    const guessedLetter = guessInput.value;
+    const guess = guessInput.value;
     //console.log(guessedLetter);
 
     //letter input fix it msg 
-    const validGuess = validLetterInput(guessedLetter);
+    const validGuess = validLetterInput(guess);
     console.log(validGuess)
 
     if (validGuess) {
-        makeGuess(guessedLetter);
+        makeGuess(guess);
     
     }
 //clearing letter
@@ -68,14 +68,15 @@ const validLetterInput = function (input){
     else {
     return input;
     }
-}
+};
 
-const makeGuess = function (guessedLetter) {
-guessedLetter = guessedLetter.toUpperCase();
-if (guessedLetters.includes(guessedLetter)) {
+const makeGuess = function (guess) {
+guess = guess.toUpperCase();
+if (guessedLetters.includes(guess)) {
     topMessage.innerText = "Opps! You've already guessed that letter!"
 } else {
-guessedLetters.push(guessedLetter);
+guessedLetters.push(guess);
+console.log(guessedLetters)
 
 letterUpdateShow();
 
@@ -92,19 +93,26 @@ const letterUpdateShow = function () {
         li.innerText = letter;
         guessLetter.append(li);
     }
-}
+};
 //letters to show up and word to be put in array
-const wordInProgress = function (){
+const wordInProgress = function (guessedLetters){
     const wordUpper = word.toUpperCase();
     const wordArray = wordUpper.split("");
     const reveal = [];
-    console.log(wordArray);
+    //console.log(wordArray);
 
     for (const letter of wordArray){
-      if (guessedLetters.includes(letter))
-       { reveal.push("●")}
-    }
+      if (guessedLetters.includes(letter)){
+        reveal.push(letter.toUpperCase());
+      } else {
+        reveal.push("●")
+    }  
 }
+
+    wordProgress.innerText = reveal.join("");
+    winnerCheck();
+};
+
 const winnerCheck = function () {
     if (word.toUpperCase() === wordInProgress.innerText) {
         topMessage.classList.add("win");
