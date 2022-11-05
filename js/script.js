@@ -5,10 +5,10 @@ const wordProgress = document.querySelector(".word-in-progress")
 const remainGuessNum = document.querySelector(".remaining")
 const remainGuessText = document.querySelector(" .remaining span")
 const topMessage = document.querySelector(".message")
-const playAgainBtn = document.querySelector(".play-again hide")
+const playAgainBtn = document.querySelector(".play-again")
 let word = "magnolia"
-const guessedLetters = [];
-let remainingGuesses = 8;
+let guessedLetters = [];
+let remainingGuesses = 3;
 
 //api for words
 const getWord = async function () {
@@ -19,7 +19,6 @@ const getWord = async function () {
 //random word index
     const randomIndex = Math.floor(Math.random() * wordArray.length);
     word = wordArray[randomIndex].trim();
-    randomWord = word
 
     dotPlaceholder(word);
 }
@@ -147,7 +146,8 @@ const wordInProgress = function (guessedLetters){
             }
 
             if (remainingGuesses === 0) {
-                topMessage.innerHTML = `Game over! The word was <span class="highlight"> ${word} </span>.`;
+                topMessage.innerHTML = `Game over! The word was <span class="highlight"> ${word} </span>.` 
+                startOver();
             }
 
             else if (remainingGuesses === 1) {
@@ -165,7 +165,33 @@ const winnerCheck = function () {
     if (word.toUpperCase() === wordProgress.innerText) {
         topMessage.classList.add("win");
         topMessage.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+
+        startOver();
     }
 };
+//Game over restart elements
+  const startOver = function () {
+    guessBtn.classList.add("hide");
+    remainGuessText.classList.add("hide");
+     guessLetter.classList.add("hide");
+     playAgainBtn.classList.remove("hide")
 
-  
+    }
+    //event listener to restart game
+ playAgainBtn.addEventListener("click", function () {
+    topMessage.classList.remove("win");
+    guessedLetters = [];
+    remainingGuesses = 3;
+    remainGuessText.innerText = `${remainingGuesses} guesses`;
+    guessedLetters.innerHTML = "";
+    topMessage.innerText = "";
+
+getWord();
+
+    guessBtn.classList.remove("hide");
+    playAgainBtn.classList.add("hide");remainGuessText.classList.remove("hide");
+     guessLetter.classList.remove("hide");
+     
+ });
+   
+
