@@ -6,9 +6,11 @@ const remainGuessNum = document.querySelector(".remaining")
 const remainGuessText = document.querySelector(" .remaining span")
 const topMessage = document.querySelector(".message")
 const playAgainBtn = document.querySelector(".play-again")
+
 let word = "magnolia"
 let guessedLetters = [];
-let remainingGuesses = 3;
+let remainingGuesses = 8;
+
 
 //api for words
 const getWord = async function () {
@@ -147,6 +149,7 @@ const wordInProgress = function (guessedLetters){
 
             if (remainingGuesses === 0) {
                 topMessage.innerHTML = `Game over! The word was <span class="highlight"> ${word} </span>.` 
+
                 startOver();
             }
 
@@ -154,7 +157,7 @@ const wordInProgress = function (guessedLetters){
                 remainGuessText.innerText = `${remainingGuesses} guess`;
             }
             else {
-                remainGuessText.innerText = `${remainingGuesses} guesses`;
+                remainGuessText.innerText = `${remainingGuesses}  guesses`;
             }
         };
 
@@ -181,7 +184,7 @@ const winnerCheck = function () {
  playAgainBtn.addEventListener("click", function () {
     topMessage.classList.remove("win");
     guessedLetters = [];
-    remainingGuesses = 3;
+    remainingGuesses = 8;
     remainGuessText.innerText = `${remainingGuesses} guesses`;
     guessedLetters.innerHTML = "";
     topMessage.innerText = "";
