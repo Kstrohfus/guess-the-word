@@ -175,9 +175,9 @@ const winnerCheck = function () {
 //Game over restart elements
   const startOver = function () {
     guessBtn.classList.add("hide");
-    remainGuessText.classList.add("hide");
-     guessLetter.classList.add("hide");
-     playAgainBtn.classList.remove("hide")
+    remainGuessNum.classList.add("hide");
+    guessLetter.classList.add("hide");
+    playAgainBtn.classList.remove("hide")
 
     }
     //event listener to restart game
@@ -186,14 +186,15 @@ const winnerCheck = function () {
     guessedLetters = [];
     remainingGuesses = 8;
     remainGuessText.innerText = `${remainingGuesses} guesses`;
-    guessedLetters.innerHTML = "";
+    guessLetter.innerHTML = "";
     topMessage.innerText = "";
 
 getWord();
 
     guessBtn.classList.remove("hide");
-    playAgainBtn.classList.add("hide");remainGuessText.classList.remove("hide");
-     guessLetter.classList.remove("hide");
+    playAgainBtn.classList.add("hide");
+    remainGuessNum.classList.remove("hide");
+    guessLetter.classList.remove("hide");
      
  });
    
